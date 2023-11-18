@@ -1,0 +1,57 @@
+NAME: Abhay kumar
+COLLEGE NAME:BANGALORE INSTITUTE OF TECHNOLOGY
+YEAR OF PASSING: 2024
+PHONE NO : 7909060872
+EMAIL a4abhay2002@gmail.com
+
+#include <iostream>
+#include <vector>
+Using namespace std ;
+
+class Product {
+public:
+    string name;
+    double unitPrice;
+    double gst;
+    int quantity;
+
+    Product(string n, double price, double gstRate, int   qty)
+        : name(n), unitPrice(price), gst(gstRate), quantity(qty) {}
+
+    double calculateTotal() const {
+        return unitPrice * quantity * (1 + gst / 100);
+    }
+};
+
+int main() {
+    
+    vector<Product> basket = {
+        {"Leather wallet", 1100, 18, 1},
+        {"Umbrella", 900, 12, 4},
+        {"Cigarette", 200, 28, 3},
+        {"Honey", 100, 0, 2}
+    };
+
+    
+    double maxGSTAmount = 0;
+    string maxGSTProduct;
+    for (const auto& product : basket) {
+        double gstAmount = product.unitPrice * product.quantity * product.gst / 100;
+        if (gstAmount > maxGSTAmount) {
+            maxGSTAmount = gstAmount;
+            maxGSTProduct = product.name;
+        }
+    }
+
+    
+    double totalAmount = 0;
+    for (const auto& product : basket) {
+        totalAmount += product.calculateTotal();
+    }
+
+    
+    cout << "Product with maximum GST amount: " << maxGSTProduct << endl;
+    cout << "Total amount to be paid Rs " << totalAmount << endl;
+
+    return 0;
+}
